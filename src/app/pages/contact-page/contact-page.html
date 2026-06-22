@@ -1,23 +1,42 @@
-<section id="contact" class="container">
-    <div class="section-header">
+<section class="container pt-5">
+    <div class="section-header pt-4">
         <span class="mono-text">04.</span>
         <h2 class="section-title">Get In Touch</h2>
         <div class="section-line"></div>
     </div>
 
-    <div class="bento-card">
-        <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">What's Next?</h3>
-        <p>
-            As I approach the end of my degree at UNO, I am actively seeking full-time software engineering and web development opportunities. Feel free to drop a message!
+    <div class="bento-card contact-card">
+        <h3 class="gradient-text contact-subtitle">What's Next?</h3>
+        <p class="contact-lead">
+            As I approach graduation, I am actively seeking full-time software engineering and web development opportunities. Have a question or want to chat? Drop a message below!
         </p>
-        <form class="contact-form" onsubmit="event.preventDefault(); this.innerHTML='<h3 class=\'gradient-text\' style=\'text-align:center; font-size:1.5rem; margin-top:2rem;\'>Message sent successfully!</h3><p style=\'text-align:center;\'>Thank you for reaching out. I will get back to you soon.</p>';">
+        
+        <form class="contact-form" onsubmit="event.preventDefault(); this.innerHTML='<div class=\'form-success\'><h3 class=\'gradient-text\'>Message sent successfully!</h3><p>Thank you for reaching out. I will get back to you shortly.</p></div>';">
             <div class="form-row">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
+                <div class="form-group">
+                    <input type="text" id="name" placeholder=" " required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder=" " required>
+                    <label for="email">Your Email</label>
+                </div>
             </div>
-            <input type="text" placeholder="Subject" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn btn-primary" style="align-self: center; padding: 1rem 3rem;">Send Message</button>
+            
+            <div class="form-group">
+                <input type="text" id="subject" placeholder=" " required>
+                <label for="subject">Subject</label>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="message" placeholder=" " required></textarea>
+                <label for="message">Your Message</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary rounded-pill px-5 py-3 align-self-center layout-btn">
+                <span>Send Message</span>
+                <i class="fas fa-paper-plane ms-2"></i>
+            </button>
         </form>
     </div>
 </section>

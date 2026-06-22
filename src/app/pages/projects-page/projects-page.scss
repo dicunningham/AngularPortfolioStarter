@@ -1,17 +1,166 @@
-.project-links {
+.project-card {
     display: flex;
-    gap: 1rem;
-    margin-top: auto;
-}
+    flex-direction: column;
+    padding: 0 !important; /* Full edge bleed for clean bento framing */
+    overflow: hidden;      /* Clips images cleanly to the card's rounded borders */
 
-.project-links .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    gap: 0.5rem;
-}
+    /* -------------------------------------------
+       THE IMAGE SHOWCASE (WITH LAYER FIXES)
+    ------------------------------------------- */
+    .project-img {
+        width: 100%;
+        height: 240px; /* Base height for standard square cards */
+        position: relative;
+        overflow: hidden;
+        background: #101012;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-.project-links svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
+        &.horizontal-preview {
+            height: 360px; /* Extra height for wide web app cards */
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            
+            /* Layer 1: Base image layer */
+            position: relative;
+            z-index: 1; 
+            
+            filter: grayscale(100%) brightness(0.6) contrast(1.15);
+            will-change: transform, filter;
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), 
+                        filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Layer 2: Deep vignette overlay (Smooths image into text background) */
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 2; /* Sits directly on top of the image */
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 40%,
+                rgba(0, 0, 0, 0.5) 85%,
+                rgba(9, 9, 11, 0.95) 100
+            );
+            pointer-events: none;
+        }
+
+        /* Layer 3: CINEMATIC GLASS SHINE SWEEP */
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3; /* Guaranteed top layer over the image and filters */
+            pointer-events: none;
+            
+            /* Widen the fade paths and boost the center intensity */
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 15%,
+                rgba(255, 255, 255, 0.45) 50%, /* Increased opacity for maximum visibility */
+                rgba(255, 255, 255, 0) 85%
+            );
+            
+            /* Hidden far off to the left by default, slanted at 30 degrees */
+            transform: translateX(-150%) skewX(-30deg);
+            will-change: transform;
+            
+            /* Slowed down to 1.2s with a custom ease-out curve that catches the eye */
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    }
+
+    /* -------------------------------------------
+       INTERACTIVE HOVER TRIGGERS
+    ------------------------------------------- */
+    &:hover {
+        .project-img {
+            img {
+                transform: scale(1.04) translateY(-1%);
+                filter: grayscale(0%) brightness(1) contrast(1.05); /* Color snap activation */
+            }
+
+            /* Fires the light reflection glint all the way across the card width */
+            &::before {
+                transform: translateX(150%) skewX(-30deg);
+            }
+
+            border-bottom-color: rgba(139, 92, 246, 0.25);
+        }
+    }
+
+    /* -------------------------------------------
+       CARD CONTENT & TYPOGRAPHY
+    ------------------------------------------- */
+    .project-content {
+        padding: 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.5px;
+        color: var(--text-main, #ffffff);
+    }
+
+    .project-desc {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    /* Pill Badges */
+    .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+
+        span {
+            font-family: var(--font-mono, monospace);
+            font-size: 0.72rem;
+            color: var(--accent-start);
+            background: rgba(139, 92, 246, 0.08);
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+    }
+
+    /* Action Links (Ensuring Font Awesome works cleanly) */
+    .project-links {
+        display: flex;
+        gap: 1.2rem;
+        margin-top: auto; /* Permanently pins actionable utility items cleanly to bottom base */
+
+        a {
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+
+            i, svg, .svg-inline--fa {
+                font-size: 1.25rem;
+                height: 1.25rem;
+                width: auto;
+                display: inline-block;
+            }
+
+            &:hover {
+                color:var(--accent-end);
+            }
+        }
+    }
 }

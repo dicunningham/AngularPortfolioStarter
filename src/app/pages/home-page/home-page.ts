@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Config } from '../../services/config';
 
 @Component({
   selector: 'app-home-page',
@@ -11,8 +12,6 @@ import { RouterLink } from '@angular/router';
 })
 export class HomePage {
 
-  @Input()
-  title: string = '';
-  name: string = 'Danie Cunningham';
-  role: string = 'Software Engineer';
+  config = inject(Config);
+
 }

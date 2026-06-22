@@ -1,11 +1,16 @@
-<footer>
-    <div class="container">
-        <div class="social-links">
-            <a href="#">GitHub</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Twitter</a>
-            <a href="#">Resume</a>
-        </div>
-        <p>Designed & Built with Pure HTML/CSS by Alex.dev &copy; 2026</p>
+<footer class="container mt-5 py-5 text-center">
+    <div class="social-links d-flex justify-content-center gap-4 mb-3">
+        <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="/assets/resume.pdf" target="_blank" aria-label="Resume">
+            <i class="fas fa-file-alt"></i>
+        </a>
     </div>
+    <p>
+        &copy; {{ config.currentYear }} {{config.myName}}. All rights reserved.
+    </p>
 </footer>

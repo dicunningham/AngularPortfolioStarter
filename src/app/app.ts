@@ -13,4 +13,5 @@ export class App {
   protected readonly title = signal('AngularPortfolioStarter');
 
   myTitle: string = 'Ms.';
+  myName: string = 'Danie Cunningham';
 }

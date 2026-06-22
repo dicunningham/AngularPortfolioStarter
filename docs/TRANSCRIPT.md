@@ -1,3 +1,8 @@
+## Tutorial Reference
+
+- **Playlist:** [Angular + Firebase Portfolio Tutorial Series](https://www.youtube.com/playlist?list=PLUyMmGjhpzR5EWy8syTZjD_YMBSdXYlgJ)
+- **Starter Repo:** [miltonthefirst/portfolio-starter](https://github.com/miltonthefirst/portfolio-starter)
+
 # Tech Exercise Part 3 — AI Conversation Transcript
 
 ## Q&A Log

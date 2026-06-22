@@ -1,0 +1,28 @@
+.about-bento {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile first: single column */
+    gap: 1.5rem;
+
+    /* Desktop layout: applies the 3fr 2fr split on larger screens */
+    @media (min-width: 992px) {
+        grid-template-columns: 3fr 2fr;
+    }
+}
+
+.about-text {
+    
+    h3 {
+        color: var(--text-main, #fff); 
+    }
+
+    p {
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

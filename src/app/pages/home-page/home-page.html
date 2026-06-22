@@ -1,16 +1,27 @@
-<section id="hero" class="container">
-    <div class="hero-content">
-        <div class="hero-badge">✨ BSCS Major @ UNO & Web Developer</div>
-        <p>Hi, my name is</p>
-        <h1 class="hero-title">Danie Cunningham <br>
-            <span class="gradient-text">I build for the web. <br>Back to front.</span>
-        </h1>
-        <p class="hero-desc">
-            I'm a CS student with several years of web development experience, working on digital projects that blend thoughtful design with a growing engineering toolkit.
-        </p>
-        <div class="hero-actions">
-            <a routerLink="/projects" class="btn btn-primary">View Projects</a>
-            <a routerLink="/contact" class="btn btn-glow">Let's Connect</a>
+<section class="container min-vh-100 d-flex align-items-center justify-content-center pt-5">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-lg-10 text-center">
+            
+            <div class="hero-badge d-inline-block px-4 py-2 rounded-pill mb-4 fw-medium" style="font-size: 0.85rem;">
+                ✨ BSCS Major @ UNO & Web Developer
+            </div>
+            
+            <p class="fs-5 mb-2">Hi, my name is</p>
+            
+            <h1 class="display-3 fw-bolder mb-4 lh-sm" style="letter-spacing: -2px;">
+                {{config.myName}}<br>
+                <span class="gradient-text">Hard problems solved,<br>beautifully delivered.</span>
+            </h1>
+            
+            <p class="fs-5 text-secondary mx-auto mb-5" style="max-width: 800px; line-height: 1.8;">
+                I'm a CS student with several years of web development experience, working on digital projects that blend thoughtful design with a growing engineering toolkit.
+            </p>
+            
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a routerLink="/projects" class="btn btn-primary px-4 py-2 rounded-pill">View Projects</a>
+                <a routerLink="/contact" class="btn btn-glow px-4 py-2 rounded-pill">Let's Connect</a>
+            </div>
+
         </div>
     </div>
 </section>

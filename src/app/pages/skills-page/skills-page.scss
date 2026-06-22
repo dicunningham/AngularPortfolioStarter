@@ -1,5 +1,29 @@
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+/* skills-page.component.scss */
+
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 130px;  /* Adjusted for larger icons */
+    height: 130px; /* Adjusted for larger icons */
+    cursor: default;
+
+    & .fab, & .fas {
+        font-size: 2.5rem !important; 
+        margin-bottom: 1rem !important;
+        color: #5e9693 !important; /* Your preferred color */
+        transition: color 0.3s ease;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-5px);
+        border-color: var(--accent-end);
+
+        // Change icon color on card hover
+        & .fab, & .fas {
+            color: var(--accent-end) !important;
+        }
+    }
 }
