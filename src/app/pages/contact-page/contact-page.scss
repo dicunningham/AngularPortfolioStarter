@@ -18,7 +18,7 @@
 }
 
 .contact-lead {
-    color: var(--text-muted);
+    color: var(--text-main);
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 3.5rem;
@@ -70,7 +70,7 @@
 
             &:focus {
                 outline: none;
-                border-color: var(--accent-start);
+                border-color: var(--accent-end);
                 box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
             }
         }
@@ -96,7 +96,7 @@
         textarea:focus ~ label,
         textarea:not(:placeholder-shown) ~ label {
             transform: translateY(-0.55rem) scale(0.78);
-            color: var(--accent-start, #8b5cf6);
+            color: var(--accent-end);
         }
     }
 

@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Projects } from '../../services/projects';
+import { Project } from '../../models/project.model';
 
 @Component({
   selector: 'app-projects-page',
   imports: [],
   templateUrl: './projects-page.html',
-  styleUrl: './projects-page.scss',
+  styleUrls: ['./projects-page.scss']
 })
-export class ProjectsPage {
+export class ProjectsPage implements OnInit {
+  private projectsService = inject(Projects);
+  
+  // Make sure this does NOT say "private" before it!
+  projects: Project[] = []; 
 
+  ngOnInit(): void {
+    this.projects = this.projectsService.getProjects();
+  }
 }

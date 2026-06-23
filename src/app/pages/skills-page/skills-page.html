@@ -5,38 +5,24 @@
         <div class="section-line"></div>
     </div>
 
-    <p>Technologies & Domains I work with</p>
-
-    <h3 class="h5 mb-4 text-white-50">Frontend & UI</h3>
-    <div class="d-flex flex-wrap gap-3 mb-5">
-        <div class="bento-card skill-card">
-            <i class="fa-brands fa-html5"></i> 
-            <span>HTML5</span>
+    <p class="mb-5">Technologies & Domains I work with</p>
+    
+    @for (category of categories; track category.title) {
+        
+        <h3 class="h5 mb-4 text-white-50">{{ category.title }}</h3>
+        
+        <div class="d-flex flex-wrap gap-3 mb-5">
+            @for (skill of category.skills; track skill.name) {
+                <div class="bento-card skill-card">
+                    
+                    @if (skill.iconClass) {
+                        <i class="{{ skill.iconClass }} fa-2xl"></i>
+                    }
+                    
+                    <span>{{ skill.name }}</span>
+                </div>
+            }
         </div>
-        <div class="bento-card skill-card"><i class="fa-brands fa-css3"></i> <span>CSS3</span></div>
-        <div class="bento-card skill-card"><i class="fab fa-js"></i> <span>JavaScript</span></div>
-        <div class="bento-card skill-card"><i class="fab fa-react"></i> <span>React.js</span></div>
-        <div class="bento-card skill-card"><i class="fa-brands fa-tailwind-css"></i> <span>Tailwind</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-pen-nib"></i> <span>UI/UX Design</span></div>
-    </div>
 
-    <h3 class="h5 mb-4 text-white-50">Backend & Core CS</h3>
-    <div class="d-flex flex-wrap gap-3 mb-5">
-        <div class="bento-card skill-card"><i class="fa-brands fa-node-js"></i> <span>Node.js</span></div>
-        <div class="bento-card skill-card"><i class="fab fa-python"></i> <span>Python</span></div>
-        <div class="bento-card skill-card"><i class="fab fa-java"></i> <span>Java</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-code"></i> <span>C / C++</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-database"></i> <span>SQL</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-project-diagram"></i> <span>Data Struct.</span></div>
-    </div>
-
-    <h3 class="h5 mb-4 text-white-50">Domain Expertise</h3>
-    <div class="d-flex flex-wrap gap-3">
-        <div class="bento-card skill-card"><i class="fas fa-sitemap"></i> <span>CMS Mngmt</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-shield-alt"></i> <span>Brand Comp.</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-network-wired"></i> <span>Intranet</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-universal-access"></i> <span>Accessibility</span></div>
-        <div class="bento-card skill-card"><i class="fas fa-tasks"></i> <span>Agile</span></div>
-        <div class="bento-card skill-card"><i class="fab fa-git-alt"></i> <span>Git</span></div>
-    </div>
+    }
 </section>

@@ -7,86 +7,40 @@
 
     <div class="row g-4">
         
-        <div class="col-12 col-lg-8">
-            <div class="bento-card project-card h-100">
-                <div class="project-img horizontal-preview">
-                    <img src="/placeholder-dashboard-design-example-hcare.png" alt="Hospital Intranet Dashboard Preview" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Hospital Intranet Dashboard</h3>
-                    <p class="project-desc">A modernized user interface for the team member contact directory and internal resources, improving usability and strict compliance with brand templates.</p>
-                    <div class="project-tech">
-                        <span>JavaScript</span>
-                        <span>HTML/CSS</span>
-                        <span>CMS</span>
+        @for (project of projects; track project.name; let idx = $index) {
+            <div class="col-12 {{ idx === 0 ? 'col-lg-8' : idx === 1 ? 'col-lg-4' : 'col-lg-6' }}">
+                <div class="bento-card project-card h-100">
+                    <div class="project-img">
+                        <img [src]="project.image" [alt]="project.name" loading="lazy">
                     </div>
-                    <div class="project-links">
-                        <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
-                        <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-12 col-lg-4">
-            <div class="bento-card project-card h-100">
-                <div class="project-img">
-                    <img src="/placeholder-app.png" alt="Capital Campaign Website Preview" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Capital Campaign Website</h3>
-                    <p class="project-desc">Designed and developed public-facing web pages to strongly support the hospital's capital campaign, focusing heavily on intuitive layouts.</p>
-                    <div class="project-tech">
-                        <span>React</span>
-                        <span>Tailwind CSS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
-                        <a href="#" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">{{ project.name }}</h3>
+                        <p class="project-desc">{{ project.description }}</p>
+                        
+                        <div class="project-tech">
+                            @for (tag of project.tags; track tag) {
+                                <span>{{ tag }}</span>
+                            }
+                        </div>
+                        
+                        <div class="project-links">
+                            @if (project.repoLink) {
+                                <a [href]="project.repoLink" target="_blank" [aria-label]="project.name + ' Repository'">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            }
+                            
+                            @if (project.demoLink) {
+                                <a [href]="project.demoLink" target="_blank" [aria-label]="project.name + ' Live Demo'">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="col-12 col-lg-4">
-            <div class="bento-card project-card h-100">
-                <div class="project-img">
-                    <img src="/placeholder-image.png" alt="Patient Services Portal Preview" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Patient Services Portal</h3>
-                    <p class="project-desc">A full-stack prototype focusing on web accessibility and seamless communication between patients and hospital administration.</p>
-                    <div class="project-tech">
-                        <span>Node.js</span>
-                        <span>Express</span>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-12 col-lg-8">
-            <div class="bento-card project-card h-100">
-                <div class="project-img horizontal-preview">
-                    <img src="/placeholder-image.png" alt="CS Algorithms Library Preview" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">CS Algorithms Library</h3>
-                    <p class="project-desc">A deep-dive collection of fundamental computer science algorithms and data structures implemented natively in Java and C++ as part of my university coursework.</p>
-                    <div class="project-tech">
-                        <span>Java</span>
-                        <span>C++</span>
-                        <span>Algorithms</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     
     </div>
 </section>

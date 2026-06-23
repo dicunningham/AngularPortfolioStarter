@@ -134,10 +134,10 @@
             font-family: var(--font-mono, monospace);
             font-size: 0.72rem;
             color: var(--accent-start);
-            background: rgba(139, 92, 246, 0.08);
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
             padding: 0.25rem 0.75rem;
             border-radius: 100px;
-            border: 1px solid rgba(139, 92, 246, 0.15);
         }
     }
 
@@ -159,7 +159,7 @@
             }
 
             &:hover {
-                color:var(--accent-end);
+                color: var(--accent-end);
             }
         }
     }
