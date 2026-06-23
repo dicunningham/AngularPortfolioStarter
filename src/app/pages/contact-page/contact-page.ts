@@ -7,7 +7,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   templateUrl: './contact-page.html',
   styleUrl: './contact-page.scss',
 })
-export class ContactPageComponent {
+export class ContactPage {
   private fb = inject(FormBuilder);
 
   contactForm: FormGroup = this.fb.group({
