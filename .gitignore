@@ -36,6 +36,7 @@ yarn-error.log*
 firebase-debug.log
 
 # Miscellaneous
+.firebase
 /.angular/cache
 .sass-cache/
 /connect.lock
