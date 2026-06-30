@@ -8,21 +8,17 @@
     <p class="mb-5">Technologies & Domains I work with</p>
     
     @for (category of categories; track category.title) {
-        
-        <h3 class="h5 mb-4 text-white-50">{{ category.title }}</h3>
-        
-        <div class="d-flex flex-wrap gap-3 mb-5">
-            @for (skill of category.skills; track skill.name) {
-                <div class="bento-card skill-card">
-                    
-                    @if (skill.iconClass) {
-                        <i class="{{ skill.iconClass }} fa-2xl"></i>
-                    }
-                    
-                    <span>{{ skill.name }}</span>
-                </div>
-            }
-        </div>
-
-    }
+    <h3 class="h5 mb-4 text-white-50">{{ category.title }}</h3>
+    
+    <div class="d-flex flex-wrap gap-3 mb-5">
+        @for (skill of category.skills; track skill.name) {
+            <div class="bento-card skill-card d-flex align-items-center gap-3">
+                @if (skill.iconClass) {
+                    <i [class]="skill.iconClass + ' fa-2xl'"></i>
+                }
+                <span>{{ skill.name }}</span>
+            </div>
+        }
+    </div>
+}
 </section>
