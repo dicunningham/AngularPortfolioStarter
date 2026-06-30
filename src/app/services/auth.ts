@@ -1,16 +1,12 @@
-import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { environment } from '../../environments/environment';
+import { Injectable, inject } from '@angular/core';
+import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private app = initializeApp(environment.firebaseConfig);
-  public auth = getAuth(this.app);
-
-  constructor() {}
+  // We use the 'inject' function to grab the instance Angular already created
+  private auth = inject(Auth);
 
   // Login method
   async login(email: string, password: string) {
@@ -21,5 +17,4 @@ export class AuthService {
   async logout() {
     return await signOut(this.auth);
   }
-
 }

@@ -1,43 +1,38 @@
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
-  template: `
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-4">
-          <div class="card p-4">
-            <h2 class="mb-3">Admin Login</h2>
-            <div class="mb-3">
-              <input [(ngModel)]="email" class="form-control" placeholder="Email" />
-            </div>
-            <div class="mb-3">
-              <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password" />
-            </div>
-            <button (click)="handleLogin()" class="btn btn-primary w-100">Login</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
+  imports: [ReactiveFormsModule],
+  templateUrl: './login.html'
 })
-export class Login {
-  email = '';
-  password = '';
+export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  loading = signal(false);
+
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  });
+
   async handleLogin() {
+    if (this.loginForm.invalid) return;
+
+    this.loading.set(true);
+
     try {
-      await this.authService.login(this.email, this.password);
+      const { email, password } = this.loginForm.value;
+      await this.authService.login(email!, password!);
       this.router.navigate(['/admin/dashboard']);
     } catch (error) {
-      alert('Login failed. Check your credentials.');
+      alert('Login failed. Please check your credentials.');
+    } finally {
+      this.loading.set(false);
     }
   }
 }
