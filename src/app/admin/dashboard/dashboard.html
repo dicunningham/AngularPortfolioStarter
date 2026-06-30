@@ -1,24 +1,57 @@
-<nav class="navbar navbar-dark bg-dark p-3">
-  <div class="container-fluid">
-    <span class="navbar-brand">Admin Dashboard</span>
-    <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
+<section class="container pt-5">
+  <div class="section-header pt-4">
+    <h2 class="section-title">Admin Dashboard</h2>
+    <div class="section-line"></div>
   </div>
-</nav>
 
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="list-group">
-        <a class="list-group-item list-group-item-action active">Manage Projects</a>
-        <a class="list-group-item list-group-item-action">User Settings</a>
+  <div class="about-bento" style="display: block; max-width: 800px; margin: 0 auto;">
+    <div class="bento-card p-4">
+      
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 style="font-size: 1.25rem; margin: 0;">Portfolio Content Control</h3>
+        <!-- Clean layout logout button -->
+        <button (click)="logout()" class="btn btn-glow rounded-pill px-3 py-1 layout-btn" style="font-size: 0.85rem;">
+          <i class="bi bi-box-arrow-right me-1"></i> LOGOUT
+        </button>
       </div>
-    </div>
-    <div class="col-md-9">
-      <div class="card p-4">
-        <h3>Welcome, Admin!</h3>
-        <p class="text-muted">Use the sidebar to manage your portfolio content.</p>
-        <button class="btn btn-primary">Add New Project</button>
+
+      <p class="text-muted mb-4">
+        Select a section below to add, edit, or remove items from your public-facing portfolio layout.
+      </p>
+      
+      <!-- Two-column Management Grid -->
+      <div class="row g-4">
+        
+        <!-- Projects Portal -->
+        <div class="col-md-6">
+          <div [routerLink]="['/admin/projects']" class="p-4 rounded border border-secondary-subtle bg-dark bg-opacity-25 h-100 d-flex flex-column justify-content-between position-relative admin-portal-card" style="cursor: pointer; transition: transform 0.2s ease;">
+            <div>
+              <span class="mono-text d-block mb-2" style="font-size: 0.8rem; color: var(--accent-end);">MODULE 01</span>
+              <h4 style="font-size: 1.15rem; font-weight: 700;">Manage Projects</h4>
+              <p class="text-muted small mt-2 mb-0">Update featured images, repository links, descriptive summaries, and production URLs.</p>
+            </div>
+            <div class="text-end mt-3">
+              <span class="mono-text text-decoration-none" style="font-size: 0.85rem;">ENTER <i class="bi bi-arrow-right ms-1"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills Portal -->
+        <div class="col-md-6">
+          <div [routerLink]="['/admin/skills']" class="p-4 rounded border border-secondary-subtle bg-dark bg-opacity-25 h-100 d-flex flex-column justify-content-between position-relative admin-portal-card" style="cursor: pointer; transition: transform 0.2s ease;">
+            <div>
+              <span class="mono-text d-block mb-2" style="font-size: 0.8rem; color: var(--accent-end);">MODULE 02</span>
+              <h4 style="font-size: 1.15rem; font-weight: 700;">Manage Skills</h4>
+              <p class="text-muted small mt-2 mb-0">Adjust core competencies, categorize tools, and fine-tune your tech-stack breakdown.</p>
+            </div>
+            <div class="text-end mt-3">
+              <span class="mono-text text-decoration-none" style="font-size: 0.85rem;">ENTER <i class="bi bi-arrow-right ms-1"></i></span>
+            </div>
+          </div>
+        </div>
+
       </div>
+
     </div>
   </div>
-</div>
+</section>

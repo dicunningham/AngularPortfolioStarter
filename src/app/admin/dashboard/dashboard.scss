@@ -1,8 +1,11 @@
-.list-group-item {
-  cursor: pointer;
-}
-
-:host {
-  display: block;
-  min-height: 100vh;
+.admin-portal-card {
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-end) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    
+    span {
+      color: var(--accent-end);
+    }
+  }
 }
