@@ -28,7 +28,7 @@
 }
 
 /* -------------------------------------------
-   FORM LAYOUT & FLOATING LABELS
+   FORM LAYOUT (Structure Only)
 ------------------------------------------- */
 .contact-form {
     display: flex;
@@ -53,67 +53,9 @@
         }
     }
 
-    .form-group {
-        position: relative;
-        width: 100%;
-
-        input, textarea {
-            width: 100%;
-            padding: 1.2rem 1rem 0.8rem 1rem;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            color: var(--text-main, #ffffff);
-            font-family: var(--font-main, sans-serif);
-            font-size: 0.95rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-            &:focus {
-                outline: none;
-                border-color: var(--accent-end);
-                box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
-            }
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        label {
-            position: absolute;
-            left: 1rem;
-            top: 1rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            pointer-events: none;
-            transition: transform 0.25s ease, font-size 0.25s ease, color 0.25s ease;
-            transform-origin: left top;
-        }
-
-        input:focus ~ label,
-        input:not(:placeholder-shown) ~ label,
-        textarea:focus ~ label,
-        textarea:not(:placeholder-shown) ~ label {
-            transform: translateY(-0.55rem) scale(0.78);
-            color: var(--accent-end);
-        }
-    }
-
-    /* -------------------------------------------
-       ICON ANIMATION FOR THE GLOBAL BUTTON
-    ------------------------------------------- */
-    .layout-btn {
-        font-weight: 600;
-        font-size: 1rem;
-        
-        i {
-            transition: transform 0.3s ease;
-        }
-
-        &:hover i {
-            transform: translateX(4px) translateY(-2px);
-        }
+    textarea {
+        resize: vertical;
+        min-height: 140px; /* Unique sizing for the message box */
     }
 }
 
