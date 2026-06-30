@@ -59,3 +59,31 @@ A: Angular uses Interpolation and Property Binding to pass data down to the temp
 **Q9: What is the purpose of the ngOnInit lifecycle hook in an Angular component?**
 
 A: ngOnInit is a lifecycle hook that runs once after Angular has finished initializing the component's data-bound properties. It is the ideal place to handle initialization logic, such as fetching data from a service, rather than putting that logic inside the constructor.
+
+**Q10: Why is my Firestore service failing to stream data even though my config looks right?**
+
+A: The issue is an instance mismatch. While `provideFirestore()` is initialized in `app.config.ts`, the service isn't "seeing" that instance. We tried to force it by passing `getApp()` to the provider, but the real culprit is an environmental issue: a **version conflict** between `firebase@11` and `firebase@12` that causes the application to load two separate instances of the SDK.
+
+**Q11: How do you diagnose a "Type does not match" error?**
+
+A: The error message—*“Did you pass a reference from a different Firestore SDK?”*—is literal. By running `npm ls firebase`, we discover that two versions are bundled together. The app is trying to pass a Firestore object created by the v11 SDK into a function call being validated by the v12 SDK. Because the two versions use incompatible class definitions, the runtime check fails.
+
+* **Resolution:** We align the entire project to `firebase@11.10.0` to match the `@angular/fire` peer dependencies.
+
+**Q12: Why are my Font Awesome icons not showing up after moving to Firestore?**
+
+A: This is a "side effect" of the dependency conflict. Because the build bundles are unstable, the Font Awesome Kit script fails to initialize correctly. Even after fixing the dependencies, the icons are being injected **asynchronously**—meaning they load *after* the page renders—so the Kit's auto-scanner doesn't see the new `<i>` elements.
+
+* **Resolution:** 
+    1. Clean the dependency tree (`rm -rf node_modules`).
+    2. Update the HTML to use `[class]` binding for more reliable Angular-to-DOM class application.
+    3. Add a manual DOM re-scan trigger to the component's `next` subscription to ensure icons are parsed immediately once the data arrives.
+
+**Q13: What is the final process to get everything stable?**
+
+A: 
+
+* **Dependency Sync:** Hard-pin `firebase` to `11.10.0` in `package.json`.
+* **Environment Purge:** Run `rm -rf node_modules package-lock.json` and `npm install` for a clean slate.
+* **Cache Clearing:** Delete the `.angular` directory to force a fresh build of the service and component bundles.
+* **Refactoring:** Convert the skills-page to use modern Angular `@for` blocks and clean `[class]` property bindings, ensuring the UI accurately reflects the real-time data stream.
