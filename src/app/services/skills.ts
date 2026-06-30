@@ -1,67 +1,63 @@
-import { Injectable } from '@angular/core';
-import { SkillCategory } from '../models/skill.model';
+import { Injectable, inject } from '@angular/core';
+import { Firestore, collection, collectionData, addDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
+import { Observable, map } from 'rxjs';
+import { SkillCategory, SkillItem } from '../models/skill.model';
+
+export interface FlatSkillDocument {
+  id?: string;
+  name?: string;
+  category?: string;
+  icon?: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class SkillsService {
-  private skillCategories: SkillCategory[] = [
-    {
-      title: 'Frontend & UI',
-      skills: [
-        { name: 'HTML5', iconClass: 'fa-brands fa-html5' },
-        { name: 'CSS3', iconClass: 'fa-brands fa-css3-alt' },
-        { name: 'JavaScript', iconClass: 'fa-brands fa-js' },
-        { name: 'Angular', iconClass: 'fa-brands fa-angular' },
-        { name: 'React', iconClass: 'fa-brands fa-react' },
-        { name: 'WordPress', iconClass: 'fa-brands fa-wordpress' },
-        { name: 'TypeScript', iconClass: 'fa-brands fa-typescript' },
-        { name: 'Bootstrap', iconClass: 'fa-brands fa-bootstrap' }
-      ]
-    },
-    {
-      title: 'Backend & Core CS',
-      skills: [
-        { name: 'Node.js', iconClass: 'fa-brands fa-node-js' },
-        { name: 'Express', iconClass: 'fa-solid fa-server' },
-        { name: 'Java', iconClass: 'fa-brands fa-java' },
-        { name: 'Python', iconClass: 'fa-brands fa-python' },
-        { name: 'C', iconClass: 'fa-solid fa-c' },
-        { name: 'PHP', iconClass: 'fa-brands fa-php' },
-        { name: 'SQL', iconClass: 'fa-solid fa-database' },
-        { name: 'PostgreSQL', iconClass: 'fa-brands fa-postgresql' },
-        { name: 'REST APIs', iconClass: 'fa-solid fa-plug' },
-        { name: 'SOAP APIs', iconClass: 'fa-solid fa-plug' },
-        { name: 'ASP.NET', iconClass: 'fa-brands fa-microsoft' },
-        { name: 'PowerShell', iconClass: 'fa-solid fa-terminal' },
-        { name: 'Perl', iconClass: 'fa-solid fa-terminal' }
-      ]
-    },
-    {
-      title: 'Systems, Security & Infrastructure',
-      skills: [
-        { name: 'Ubuntu', iconClass: 'fa-brands fa-ubuntu' },
-        { name: 'Windows', iconClass: 'fa-brands fa-windows' },
-        { name: 'IIS', iconClass: 'fa-brands fa-microsoft' },
-        { name: 'Docker', iconClass: 'fa-brands fa-docker' },
-        { name: 'Bash / Shell', iconClass: 'fa-solid fa-terminal' }
-      ]
-    },
-    {
-      title: 'Developer Tools & Platforms',
-      skills: [
-        { name: 'Git', iconClass: 'fa-brands fa-git-alt' },
-        { name: 'GitHub', iconClass: 'fa-brands fa-github' },
-        { name: 'Vercel', iconClass: 'fa-solid fa-play fa-rotate-270' },
-        { name: 'Postman', iconClass: 'fa-solid fa-vial' },
-        { name: 'Vite', iconClass: 'fa-solid fa-bolt' },
-        { name: 'npm', iconClass: 'fa-brands fa-npm' }
-      ]
-    }
-  ];
+  private firestore = inject(Firestore);
+  private skillsCollection = collection(this.firestore, 'skills');
 
-  getSkillCategories(): SkillCategory[] {
-    return this.skillCategories;
+  getRawSkills(): Observable<FlatSkillDocument[]> {
+    return collectionData(this.skillsCollection, { idField: 'id' }) as Observable<FlatSkillDocument[]>;
+  }
+
+  getSkillCategories(): Observable<SkillCategory[]> {
+    return this.getRawSkills().pipe(
+      map((skills: FlatSkillDocument[]) => {
+        if (!skills || skills.length === 0) return [];
+
+        const grouped: { [key: string]: SkillItem[] } = {};
+
+        skills.forEach(skill => {
+          const catTitle = skill.category || 'Other';
+          if (!grouped[catTitle]) {
+            grouped[catTitle] = [];
+          }
+          grouped[catTitle].push({
+            name: skill.name || 'Unnamed Skill',
+            iconClass: skill.icon || 'fa-solid fa-code'
+          });
+        });
+
+        return Object.keys(grouped).map(title => ({
+          title: title,
+          skills: grouped[title]
+        }));
+      })
+    );
+  }
+
+  async addSkill(name: string, category: string, icon: string): Promise<void> {
+    await addDoc(this.skillsCollection, { name, category, icon });
+  }
+
+  async updateSkill(id: string, name: string, category: string, icon: string): Promise<void> {
+    const docRef = doc(this.firestore, 'skills', id);
+    await updateDoc(docRef, { name, category, icon });
+  }
+
+  async deleteSkill(id: string): Promise<void> {
+    const docRef = doc(this.firestore, 'skills', id);
+    await deleteDoc(docRef);
   }
 }

@@ -1,0 +1,88 @@
+<section class="container pt-5">
+  <div class="section-header pt-4">
+    <h2 class="section-title">Manage Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="mb-4">
+    <a [routerLink]="['/admin/dashboard']" class="text-decoration-none mono-text small link-secondary">
+      <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+    </a>
+  </div>
+  <div class="row g-4">
+<!-- Left Column: Add/Edit Skill Form -->
+    <div class="col-md-4">
+      <div class="bento-card p-4">
+        <h3 class="mb-3" style="font-size: 1.15rem; font-weight: 700;">
+          {{ editingId() ? 'Edit Skill' : 'Add New Skill' }}
+        </h3>
+        <form [formGroup]="skillForm" (ngSubmit)="saveSkill()">
+          <div class="form-group mb-3">
+            <input formControlName="name" id="skillName" placeholder=" " />
+            <label for="skillName">Skill Name (e.g., TypeScript)</label>
+          </div>
+          <div class="form-group mb-3">
+            <input formControlName="category" id="skillCategory" placeholder=" " />
+            <label for="skillCategory">Category (e.g., Frontend)</label>
+          </div>
+          <div class="form-group mb-4">
+            <input formControlName="icon" id="skillIcon" placeholder=" " />
+            <label for="skillIcon">Icon Class (e.g., fa-brands fa-html5)</label>
+          </div>
+          <button type="submit" class="btn btn-glow w-100 rounded-pill py-2 layout-btn" [disabled]="skillForm.invalid">
+            <i class="bi" [class.bi-plus-lg]="!editingId()" [class.bi-check-lg]="editingId()"></i>
+            {{ editingId() ? 'UPDATE SKILL' : 'ADD SKILL' }}
+          </button>
+          @if (editingId()) {
+            <button type="button" class="btn btn-outline-secondary w-100 rounded-pill py-2 mt-2" (click)="cancelEdit()">
+              Cancel
+            </button>
+          }
+        </form>
+      </div>
+    </div>
+<!-- Right Column: Current Skills Display List -->
+    <div class="col-md-8">
+      <div class="bento-card p-4">
+        <h3 class="mb-4" style="font-size: 1.15rem; font-weight: 700;">Active Stack Components</h3>
+@if (loading) {
+          <div class="text-center p-4">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mono-text small text-main mt-2">Reading from Firestore...</p>
+          </div>
+        } @else if (skills.length === 0) {
+          <p class="text-main small">No active skills found. Populate the form to seed your cloud database.</p>
+        } @else {
+          <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle custom-admin-table mb-0">
+              <thead>
+                <tr>
+                  <th class="mono-text text-body-emphasis small">ICON</th>
+                  <th class="mono-text text-body-emphasis small">NAME</th>
+                  <th class="mono-text text-body-emphasis small">CATEGORY</th>
+                  <th class="mono-text text-end text-body-emphasissmall">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+@for (skill of skills; track skill.id) {
+                  <tr [class.table-active]="editingId() === skill.id">
+                    <td><i [class]="skill.icon || 'bi bi-bookmark'" style="font-size: 1.2rem; color: var(--accent-end);"></i></td>
+                    <td class="fw-bold">{{ skill.name }}</td>
+                    <td><span class="badge bg-secondary bg-opacity-25 border border-secondary-subtle mono-text">{{ skill.category }}</span></td>
+                    <td class="text-end">
+                      <button (click)="startEdit(skill)" class="btn btn-sm btn-outline-light rounded-pill px-3 me-2">
+                        <i class="fa-solid fa-pen"></i> Edit
+                      </button>
+                      <button (click)="deleteSkill(skill.id)" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                        <i class="fa-solid fa-trash"></i> Delete
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

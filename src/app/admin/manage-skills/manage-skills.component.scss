@@ -1,0 +1,14 @@
+.custom-admin-table {
+  background: transparent !important;
+  
+  th, td {
+    padding: 1rem 0.75rem;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-main, #ffffff);
+  }
+  
+  tr:hover td {
+    background: rgba(255, 255, 255, 0.01) !important;
+  }
+}
