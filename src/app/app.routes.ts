@@ -5,7 +5,7 @@ import { SkillsPage } from './pages/skills-page/skills-page';
 import { ProjectsPage } from './pages/projects-page/projects-page';
 import { ContactPage } from './pages/contact-page/contact-page';
 import { authGuard } from './guards/auth-guard';
-import { LoginComponent } from './admin/login/login';
+import { LoginComponent } from './admin/login/login.component';
 import { Dashboard } from './admin/dashboard/dashboard';
 
 
