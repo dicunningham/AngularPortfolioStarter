@@ -11,7 +11,4 @@ import { Footer } from "./layout/footer/footer";
 })
 export class App {
   protected readonly title = signal('AngularPortfolioStarter');
-
-  myTitle: string = 'Ms.';
-  myName: string = 'Danie Cunningham';
 }

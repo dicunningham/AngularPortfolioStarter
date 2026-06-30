@@ -15,6 +15,8 @@ export const appConfig: ApplicationConfig = {
     
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
+    // This is the most "stable" way to provide Firestore without triggering 
+    // the double-initialization error
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ]

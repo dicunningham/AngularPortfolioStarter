@@ -8,11 +8,13 @@ import { authGuard } from './guards/auth-guard';
 import { LoginComponent } from './admin/login/login.component';
 import { Dashboard } from './admin/dashboard/dashboard';
 import { ManageProjects } from './admin/manage-projects/manage-projects';
-import { ManageSkills } from './admin/manage-skills/manage-skills';
+import { ManageSkillsComponent } from './admin/manage-skills/manage-skills.component';
 
 
 export const routes: Routes = [
-    { path: 'admin/login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+
+    // Secure Admin Spaces
     { 
       path: 'admin/dashboard', 
       component: Dashboard, 
@@ -25,15 +27,18 @@ export const routes: Routes = [
     },
     {
       path: 'admin/skills',
-      component: ManageSkills,
+      component: ManageSkillsComponent,
       canActivate: [authGuard]
     },
+
+    // Public Facing Pages
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomePage },
     { path: 'about', component: AboutPage },
     { path: 'skills', component: SkillsPage },
     { path: 'projects', component: ProjectsPage },
     { path: 'contact', component: ContactPage },
-    { path: 'login', component: LoginComponent},
+
+    // Wildcard catch-all redirecting dead paths back home safely
     { path: '**', redirectTo: '/home' }
 ];
