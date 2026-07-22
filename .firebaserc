@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "angular-portfolio-ed72b"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
