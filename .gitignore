@@ -51,6 +51,7 @@ __screenshots__/
 Thumbs.db
 
 # AI Agent Skills and Helper Files
+agent/
 .agents/
 .cursor/
 .claude/
