@@ -1,15 +1,20 @@
 import { TestBed } from '@angular/core/testing';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { environment } from '../../environments/environment';
+import { SkillsService } from './skills';
 
-import { Skills } from './skills';
-
-describe('Skills', () => {
-  let service: Skills;
-
+describe('SkillsService', () => {
+  let service: SkillsService;
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Skills);
+    TestBed.configureTestingModule({
+      providers: [
+        provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+        provideFirestore(() => getFirestore()),
+      ],
+    });
+    service = TestBed.inject(SkillsService);
   });
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
