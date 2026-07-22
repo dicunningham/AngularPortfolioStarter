@@ -1,5 +1,7 @@
 # AngularPortfolioStarter
 
+[![Deploy to Firebase Hosting on merge](https://github.com/dicunningham/AngularPortfolioStarter/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/dicunningham/AngularPortfolioStarter/actions/workflows/firebase-hosting-merge.yml)
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.29.
 
 ## Development server
